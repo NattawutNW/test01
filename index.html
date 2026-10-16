@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7faff">
+  <title>QuizSuite — ระบบจัดการข้อสอบ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <div id="loader" class="loader d-none" aria-live="polite">
+    <div class="loader-card"><div class="loader-ring"></div><div id="loaderLogo" class="loader-logo"><i class="fa-solid fa-graduation-cap"></i></div><strong>กำลังเตรียมข้อมูล</strong><span id="loadPercent">0%</span><div class="progress loader-progress"><div id="loadBar" class="progress-bar"></div></div></div>
+  </div>
+
+  <main id="authView" class="auth-shell">
+    <section class="auth-card">
+      <div class="welcome-panel">
+        <div class="welcome-top"><div class="brand-mark" id="welcomeLogo"><i class="fa-solid fa-graduation-cap"></i></div><span class="school-name" id="schoolNameWelcome"></span></div>
+        <div class="welcome-copy"><span class="eyebrow">QUIZSUITE · SMART CLASSROOM</span><h1>ยินดีต้อนรับ<br>ทุกท่าน</h1><p>เปลี่ยนการจัดการข้อสอบให้เป็นเรื่องง่าย<br>พร้อมเริ่มต้นการเรียนรู้ไปด้วยกัน</p></div>
+        <div class="welcome-foot"><span><i class="fa-solid fa-shield-halved"></i> ระบบจัดการที่ปลอดภัย</span><span>01 / 06</span></div>
+        <div class="orb orb-one"></div><div class="orb orb-two"></div>
+      </div>
+      <div class="auth-panel">
+        <div class="mobile-brand"><div class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></div><span>QuizSuite</span></div>
+        <div class="auth-content">
+          <div class="auth-heading"><span class="eyebrow blue">ยินดีต้อนรับกลับ</span><h2 id="authTitle">เข้าสู่ระบบ</h2><p id="authSubtitle">ลงชื่อเข้าใช้เพื่อจัดการกระดาษคำตอบของคุณ</p></div>
+          <div class="auth-switch"><button class="auth-choice active" data-auth-mode="login"><i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ</button><button class="auth-choice" data-auth-mode="register"><i class="fa-regular fa-user"></i> สมัครสมาชิก</button></div>
+          <form id="authForm" class="auth-form">
+            <div id="registerFields" class="d-none">
+              <div class="field-row"><label class="form-label" for="prefix">คำนำหน้าชื่อ</label><select class="form-select" id="prefix"><option>เด็กชาย</option><option>เด็กหญิง</option><option>นาย</option><option>นางสาว</option><option>อื่นๆ</option></select></div>
+              <div id="customPrefixWrap" class="field-row d-none"><label class="form-label" for="customPrefix">ระบุคำนำหน้า</label><input class="form-control" id="customPrefix" placeholder="คำนำหน้า"></div>
+              <div class="field-row"><label class="form-label" for="fullName">ชื่อ-สกุล</label><div class="input-icon"><i class="fa-regular fa-id-card"></i><input class="form-control" id="fullName" placeholder="กรอกชื่อและนามสกุล"></div></div>
+              <div class="field-row"><label class="form-label" for="birthDate">วัน/เดือน/ปีเกิด</label><div class="input-icon"><i class="fa-regular fa-calendar"></i><input class="form-control" type="date" id="birthDate"></div></div>
+            </div>
+            <div class="field-row"><label class="form-label" for="username">ชื่อผู้ใช้</label><div class="input-icon"><i class="fa-regular fa-user"></i><input class="form-control" id="username" autocomplete="username" placeholder="เช่น teacher01" required></div></div>
+            <div class="field-row"><label class="form-label" for="password">รหัสผ่าน</label><div class="input-icon"><i class="fa-solid fa-lock"></i><input class="form-control" type="password" id="password" autocomplete="current-password" placeholder="กรอกรหัสผ่าน" required><button type="button" class="password-toggle" aria-label="แสดงรหัสผ่าน"><i class="fa-regular fa-eye"></i></button></div></div>
+            <label id="confirmWrap" class="confirm-row d-none"><input class="form-check-input" type="checkbox" id="confirmInfo"><span>ฉันยืนยันว่าข้อมูลที่กรอกถูกต้องและยินยอมให้จัดเก็บเพื่อใช้งานในระบบ</span></label>
+            <div id="authMessage" class="form-message" role="status"></div>
+            <button class="btn btn-primary auth-submit" id="authSubmit" type="submit">เข้าสู่ระบบ <i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+          <div class="demo-note"><i class="fa-solid fa-circle-info"></i><span>ทดลองใช้งาน: <b>admin</b> / <b>admin123</b></span></div>
+        </div>
+        <div class="auth-footer"><span>© 2026 QuizSuite | KruPond (Mr.Nattawut Nukong)</span><span>ออกแบบเพื่อการเรียนรู้</span></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell d-none">
+    <aside class="sidebar" id="sidebar">
+      <a class="sidebar-brand" href="#"><div class="brand-mark small" id="sidebarLogo"><i class="fa-solid fa-graduation-cap"></i></div><div><strong>QuizSuite</strong><small id="schoolNameSide">Smart classroom</small></div></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" id="sideNav">
+        <button class="nav-item active" data-page="exam"><i class="fa-regular fa-rectangle-list"></i><span>Exam</span><span class="nav-count" id="examCount">0</span></button>
+        <button class="nav-item" data-page="class"><i class="fa-solid fa-people-roof"></i><span>Class</span></button>
+        <button class="nav-item" data-page="student"><i class="fa-solid fa-user-graduate"></i><span>Student</span></button>
+        <button class="nav-item" data-page="result"><i class="fa-solid fa-chart-simple"></i><span>Result</span></button>
+        <div class="nav-divider"></div>
+        <button class="nav-item" data-page="setting"><i class="fa-solid fa-sliders"></i><span>Setting</span></button>
+        <button class="nav-item d-none" id="adminNav" data-page="admin"><i class="fa-solid fa-user-shield"></i><span>Admin</span><span class="admin-dot"></span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-card"><div class="help-icon"><i class="fa-regular fa-lightbulb"></i></div><b>เริ่มต้นใช้งาน</b><p>สร้างข้อสอบชุดแรก แล้วจัดการห้องเรียนได้เลย</p><button id="helpCreate" class="btn btn-light btn-sm">สร้างข้อสอบ <i class="fa-solid fa-arrow-right"></i></button></div><div class="profile-mini"><div class="avatar" id="profileAvatar">A</div><div class="profile-meta"><strong id="profileName">Admin</strong><small id="profileRole">ผู้ดูแลระบบ</small></div><button id="logoutBtn" class="icon-button" title="ออกจากระบบ"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></div></div>
+    </aside>
+    <div class="main-column">
+      <header class="topbar"><button class="icon-button menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button><div class="breadcrumb"><span>Workspace</span><i class="fa-solid fa-chevron-right"></i><b id="crumbTitle">Exam</b></div><div class="top-actions"><span class="today-chip"><i class="fa-regular fa-calendar"></i><span id="todayLabel"></span></span><button class="icon-button notification-btn" title="การแจ้งเตือน"><i class="fa-regular fa-bell"></i><span></span></button><div class="top-avatar" id="topAvatar">A</div></div></header>
+      <main class="page-content" id="pageContent"></main>
+      <footer class="app-footer">© 2026 QuizSuite | KruPond (Mr.Nattawut Nukong) <span>Made for better learning</span></footer>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content confirm-modal"><div class="confirm-icon"><i class="fa-solid fa-circle-question"></i></div><h5 id="confirmTitle">ยืนยันรายการ</h5><p id="confirmText">คุณต้องการดำเนินการนี้หรือไม่?</p><div class="d-flex gap-2 justify-content-center"><button class="btn btn-light" data-bs-dismiss="modal">ยกเลิก</button><button class="btn btn-danger" id="confirmAction">ยืนยัน</button></div></div></div></div>
+  <div class="modal fade" id="answerKeyModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title">แก้ไขเฉลย</h5><div class="subtext">เลือกคำตอบที่ถูกต้องสำหรับแต่ละข้อ</div></div><button class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button></div><div class="modal-body"><div class="answer-key-grid" id="answerKeyFields"></div><div class="form-message" id="answerKeyMessage"></div></div><div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">ยกเลิก</button><button class="btn btn-primary" id="saveAnswerKey"><i class="fa-solid fa-check"></i>บันทึกเฉลย</button></div></div></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
